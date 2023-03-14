@@ -59,8 +59,8 @@ public class CounterLimiterAspect {
             String paramStr = Arrays.stream(args).filter(e -> !(e instanceof HttpServletResponse)).map(JSON::toJSONString).collect(Collectors.joining());
             String md5 = DigestUtils.md5Hex(paramStr);
             String classAndMethodName = target.getClass().getSimpleName() + "-" + signature.getName();
-//        PageManagerController-insertPage-f02862ff3b8d6fdca0a659bbd9ef5a36-11366
-            String key = classAndMethodName + "-" + md5 + "-" + userId;
+//        TestController-test01-f02862ff3b8d6fdca0a659bbd9ef5a36-11366
+            token = classAndMethodName + "-" + md5 + "-" + userId;
         }
         // 判断方法是否包含CounterLimit，有这个注解就需要进行限速操作
         BoundValueOperations<String, Integer> boundGeoOperations = redisTemplate.boundValueOps(token);
