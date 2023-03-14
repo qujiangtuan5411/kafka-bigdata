@@ -9,15 +9,15 @@ public class ResponseSupport {
     }
 
     public static <K> Response<K> successResponse(K body) {
-        return new Response<>(SUCCESS_CODE, SUCCESS_MESSAGE, body);
+        return new Response<>(body,SUCCESS_CODE, SUCCESS_MESSAGE);
     }
 
     public static <K> Response<K> failResponse(int code, String message) {
-        return new Response<>(code, message, null);
+        return new Response<>(null,code, message);
     }
 
     public static <K> Response<K> unknownErrorResponse(String message) {
-        return new Response<>(UNKNOWN_ERROR_CODE, message, null);
+        return new Response<>(null,UNKNOWN_ERROR_CODE, message);
     }
 
     public static <K> boolean isSuccess(Response<K> response) {

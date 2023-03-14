@@ -1,53 +1,87 @@
 package com.dada.dm.qujia.model;
 
-
+import com.dada.dm.qujia.exception.ResponseCodeEnum;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @description  Response
+ * @className Response
+ * @packageName com.dada.dm.qujia.model
+ * @author jt.Qu
+ * @date 2023/3/14 10:41
+ */
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> implements Serializable {
-    private static final long serialVersionUID = 3112915027924948320L;
-    private int code;
-    private String msg;
+    public static final int SUCCESS_CODE = 200;
+
+    public static final String SUCCESS = "success";
+    
+    private static final long serialVersionUID = -7782278672752498042L;
+
     private T body;
 
-    public Response(){
+    private int code;
 
-    }
+    private String msg;
 
-    public Response(int code, String msg, T body){
-        this.code = code;
+    public Response(T body, int code, String msg) {
         this.body = body;
+        this.code = code;
         this.msg = msg;
     }
-
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setBody(T body) {
-        this.body = body;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public T getBody() {
-        return body;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public Response(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
+
+    public Response(T body, ResponseCodeEnum codeEnum) {
+        this.body = body;
+        this.code = codeEnum.getCode();
+        this.msg = codeEnum.getMsg();
+    }
+
+
+    public Response(ResponseCodeEnum codeEnum) {
+        this.code = codeEnum.getCode();
+        this.msg = codeEnum.getMsg();
+    }
+
+    public Response(T body) {
+        this(body, ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMsg());
+    }
+
+    public static <T> Response<T> success() {
+        return new Response<>(ResponseCodeEnum.SUCCESS);
+    }
+
+    public static <T> Response<T> success(T t) {
+        return new Response<>(t, ResponseCodeEnum.SUCCESS);
+    }
+
+    public static <T> Response<T> success(T t, ResponseCodeEnum responseCodeEnum) {
+        return new Response<>(t, responseCodeEnum);
+    }
+
+    public static Response<String> fail(ResponseCodeEnum responseCodeEnum) {
+        return new Response<>(responseCodeEnum);
+    }
+
+    public static <T> Response<T> fail(T t) {
+        return new Response<>(t, ResponseCodeEnum.FAIL);
+    }
+
+    public static <T> Response<T> fail(T t, ResponseCodeEnum responseCodeEnum) {
+        return new Response<>(t, responseCodeEnum);
+    }
+
+
+    public static Response<String> fail(String message) {
+        return new Response<>(ResponseCodeEnum.FAIL.getCode(), message);
+    }
+
 
 }

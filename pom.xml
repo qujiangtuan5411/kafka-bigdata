@@ -25,6 +25,7 @@
         <hbase.version>2.2.5</hbase.version>
         <hive.version>1.1.1</hive.version>
         <spark.sql.version>3.0.0</spark.sql.version>
+        <influxdb.version>2.23</influxdb.version>
     </properties>
     <dependencies>
         <dependency>
@@ -108,7 +109,19 @@
         </dependency>
 
 
-<!--       es 6.x-->
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>${influxdb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
+        <!--       es 6.x-->
 <!--        <dependency>-->
 <!--            <groupId>org.elasticsearch.client</groupId>-->
 <!--            <artifactId>transport</artifactId>-->
@@ -228,6 +241,20 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
@@ -238,7 +265,17 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-shaded-client</artifactId>
             <version>${hbase.version}</version>
-<!--            <version>2.0.0</version>-->
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+            <!--            <version>2.0.0</version>-->
         </dependency>
 
         <dependency>
@@ -270,6 +307,10 @@
                     <groupId>org.eclipse.jetty.aggregate</groupId>
                     <artifactId>jetty-all</artifactId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -277,9 +318,42 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.12</artifactId>
             <version>${spark.sql.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
 
 
     </dependencies>
