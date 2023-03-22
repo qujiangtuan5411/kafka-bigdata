@@ -16,7 +16,7 @@ public class GuavaLimit {
     public static void main(String[] args) throws InterruptedException {
         // qps 2
         RateLimiter rateLimiter = RateLimiter.create(2);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             String time = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME);
             System.out.println(time + ":" + rateLimiter.tryAcquire());
             Thread.sleep(250);

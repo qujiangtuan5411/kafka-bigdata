@@ -5,7 +5,7 @@ package com.dada.dm.qujia.exception;
  * @className AbstractCodeException
  * @packageName com.dada.dm.qujia.exception
  * @author jt.Qu
- * @date 2023/3/14 10:39
+ * @date 2023/3/16 10:17
  */
 
 public abstract class AbstractCodeException extends RuntimeException {
