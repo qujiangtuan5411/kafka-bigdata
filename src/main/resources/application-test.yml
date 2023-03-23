@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: kafka-demo
+  cloud:
+    sentinel:
+      transport:
+        client-ip: 8719
+        dashboard: localhost:8082

@@ -1,0 +1,12 @@
+server:
+  port: 8387
+
+spring:
+  cloud:
+    sentinel:
+      transport:
+#        client-ip: 8719
+        dashboard: localhost:8082
+      enabled: true
+  application:
+    name: qujia-demo
