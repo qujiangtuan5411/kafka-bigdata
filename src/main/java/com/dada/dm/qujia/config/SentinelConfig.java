@@ -30,19 +30,10 @@ public class SentinelConfig implements ApplicationListener<ContextRefreshedEvent
         FlowRule flowRule = new FlowRule();
         flowRule.setResource(ResourceConstant.SENTINEL_TEST);
         flowRule.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        flowRule.setCount(6);
+        flowRule.setCount(1);
         List<FlowRule> rules = new ArrayList<>();
         rules.add(flowRule);
         FlowRuleManager.loadRules(rules);
-        //设置降级规则
-        DegradeRule degradeRule = new DegradeRule();
-        degradeRule.setResource(ResourceConstant.SENTINEL_TEST);
-        degradeRule.setGrade(RuleConstant.DEGRADE_GRADE_RT);
-        degradeRule.setCount(10); //服务响应超过 10毫秒 就熔断
-        degradeRule.setTimeWindow(10); //10秒 以后跳转到半开关状态
-        List<DegradeRule> degradeRules = new ArrayList<>();
-        degradeRules.add(degradeRule);
-        DegradeRuleManager.loadRules(degradeRules);
 
 
     }

@@ -64,43 +64,43 @@ public class LimitTestController {
      *
      * @return
      */
-//    @GetMapping("/limit/sentinel-test")
-//    public Response<?> sentinelLimiter(String key){
-//        try (Entry entry = SphU.entry(ResourceConstant.SENTINEL_TEST)) {
-//            log.info("user key :{}", key);
-//        } catch (BlockException e) {
-//            log.info("--接口访问太过频繁，请稍候再试!!!");
-//            return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
-//        } finally {
-//
-//        }
-//        JSONObject result = new JSONObject();
-//        result.put("key", key);
-//        return new Response<>(result, ResponseCodeEnum.SUCCESS);
-//    }
-
-
-    /**
-     * 分布式 sentinel 限流
-     *
-     * @return
-     */
     @GetMapping("/limit/sentinel-test")
-    @SentinelResource(value = ResourceConstant.SENTINEL_TEST, blockHandler = "flowBlockHandler")
-    public Response<?> sentinelLimiter(String key) throws InterruptedException {
-        log.info("user key :{}", key);
-        Thread.sleep(50);
+    public Response<?> sentinelLimiter(String key){
+        try (Entry entry = SphU.entry(ResourceConstant.SENTINEL_TEST)) {
+            log.info("user key :{}", key);
+        } catch (BlockException e) {
+            log.info("--接口访问太过频繁，请稍候再试!!!");
+            return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
+        } finally {
 
+        }
         JSONObject result = new JSONObject();
         result.put("key", key);
         return new Response<>(result, ResponseCodeEnum.SUCCESS);
     }
 
-    /**
-     * 返回值 请求参数要和源方法一致，注意添加的是BlockException 不是BlockedException
-     */
-    public Response<?> flowBlockHandler(String key,BlockException e) {
-        log.info("flow 流控了->{}",e.getClass().getSimpleName());
-        return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
-    }
+
+//    /**
+//     * 分布式 sentinel 限流
+//     *
+//     * @return
+//     */
+//    @GetMapping("/limit/sentinel-test")
+//    @SentinelResource(value = ResourceConstant.SENTINEL_TEST, blockHandler = "flowBlockHandler")
+//    public Response<?> sentinelLimiter(String key) throws InterruptedException {
+//        log.info("user key :{}", key);
+//        Thread.sleep(50);
+//
+//        JSONObject result = new JSONObject();
+//        result.put("key", key);
+//        return new Response<>(result, ResponseCodeEnum.SUCCESS);
+//    }
+//
+//    /**
+//     * 返回值 请求参数要和源方法一致，注意添加的是BlockException 不是BlockedException
+//     */
+//    public Response<?> flowBlockHandler(String key,BlockException e) {
+//        log.info("flow 流控了->{}",e.getClass().getSimpleName());
+//        return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
+//    }
 }
