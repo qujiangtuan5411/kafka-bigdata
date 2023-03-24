@@ -13,6 +13,11 @@ server:
       rename-on-rotate: true
       buffered: true
 
+sentinel:
+  zookeeper:
+    address: 127.0.0.1:2181
+    path: /sentinel_rule_config
+
 logging:
   level:
     root: info

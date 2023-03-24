@@ -196,6 +196,10 @@
                     <groupId>org.eclipse.jetty.aggregate</groupId>
                     <artifactId>jetty-all</artifactId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>curator-client</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-auth -->
@@ -227,6 +231,10 @@
                 <exclusion>
                     <groupId>org.eclipse.jetty.aggregate</groupId>
                     <artifactId>jetty-all</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>curator-framework</artifactId>
+                    <groupId>org.apache.curator</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -309,6 +317,10 @@
                     <artifactId>hive-shims</artifactId>
                     <groupId>org.apache.hive</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>curator-framework</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -386,6 +398,14 @@
             <version>6.1.5.Final</version>
         </dependency>
 
+
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-datasource-zookeeper -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-zookeeper</artifactId>
+            <version>1.8.1</version>
+        </dependency>
 
     </dependencies>
 
