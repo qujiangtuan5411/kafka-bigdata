@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -103,4 +104,31 @@ public class LimitTestController {
         log.info("flow 流控了->{}",e.getClass().getSimpleName());
         return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
     }
+
+
+    /**
+     * 热点规则
+     * @param id
+     * @return
+     * @throws InterruptedException
+     */
+    @GetMapping("/limit/getOrder/{id}")
+    @SentinelResource(value = ResourceConstant.GET_ORDER, blockHandler = "flowBlockHandler2")
+    public Response<?> getOrder(@PathVariable("id") Long id) throws InterruptedException {
+        log.info("order id :{}", id);
+        Thread.sleep(50);
+
+        JSONObject result = new JSONObject();
+        result.put("id", id);
+        return new Response<>(result, ResponseCodeEnum.SUCCESS);
+    }
+
+    /**
+     * 返回值 请求参数要和源方法一致，注意添加的是BlockException 不是BlockedException
+     */
+    public Response<?> flowBlockHandler2(Long id,BlockException e) {
+        log.info("flow 流控了->{}",e.getClass().getSimpleName());
+        return new Response<>(ResponseCodeEnum.ACCESS_ERROR);
+    }
+
 }

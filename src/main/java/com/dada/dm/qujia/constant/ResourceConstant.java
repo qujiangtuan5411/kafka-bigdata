@@ -10,4 +10,6 @@ package com.dada.dm.qujia.constant;
 public class ResourceConstant {
 
     public final static String SENTINEL_TEST = "sentinel_test";
+
+    public final static String GET_ORDER = "get_order";
 }
