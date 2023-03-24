@@ -1,0 +1,23 @@
+log:
+  path: /Users/${user.name}/data/logs/java/${spring.application.name}
+
+server:
+  error:
+    include-message: always
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: ${log.path}
+      prefix: qujia_demo
+      suffix: _access.log
+      rename-on-rotate: true
+      buffered: true
+
+logging:
+  level:
+    com.dada.dm.qujia.*: info
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc.*: info
